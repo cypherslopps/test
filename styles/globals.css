@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance:none; 
+  }
+
+  .remove-scrbar::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .remove-scrbar::-webkit-scrollbar-thumb {
+    background: rgb(169, 167, 167);
+    border-radius: 10px;
+  }
+
+  .clip-slate {
+    clip-path: polygon(100% 0, 100% 0%, 100% 100%, 0% 100%);
+  }
+
+  .toolbar-class {
+    color: #000 !important;
+    border-bottom: 1px solid #b7b7b773 !important;
+    padding-bottom: 10px !important;
+  }
+
+  .toolbar-class * input {
+    border: 1px solid #b7b7b7;
+    border-radius: 5px;
+    padding: 0.5px 4px;
+  }
+
+  .editor-class.rdw-editor-main {
+    height: auto;
+    padding: 10px 15px;
+  }
+
+  .rdw-dropdown-wrapper {
+    border: 1px solid #bbbaba !important;
+  }
+
+  .DraftEditor-root .public-DraftStyleDefault-block {
+    margin: .1em 0 !important;
+  }
+
+  .rdw-image-modal-btn {
+    background-color: #0091FF !important;
+  }
+
+  .wrapper-class.rdw-editor-wrapper {
+    background: white;
+    color: #000;
+    border-radius: 5px;
+  }
+
+  .profile-container > .profile > p {
+    font-weight: 700;
+  }
+
+  @media only screen and (max-width: 620px) {
+		.apexcharts-legend {
+		  margin-left: 2rem;
+		  inset: 350px 0 0 !important;
+		  gap: .6rem !important;
+		  overflow-x: scroll !important;
+		}
+	
+		.apexcharts-legend-text {
+		  font-size: 13px !important;
+		}
+	}
+}
