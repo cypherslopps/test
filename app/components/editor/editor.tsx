@@ -12,7 +12,7 @@ const Editor = dynamic(
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 interface EditorProps {
-    handleEditorChange: () => any;
+    handleEditorChange: (content: any) => any;
     label?: string;
     error?: string,
     value?: any

@@ -7,7 +7,7 @@ const ActionBar = () => {
         <Button
             role="action"
             variant="border"  
-            styles="rounded-full" 
+            className="rounded-full" 
         >
             Preview
         </Button>

@@ -47,6 +47,11 @@ export type ProposalOption = {
     stat: string
 }
 
+export type ProposalType = {
+    type: "personal_proposals" | "joined_proposals",
+    title: string
+}
+
 export type Proposals = {
     user: User;
     title: string;
@@ -57,6 +62,11 @@ export type Proposals = {
     endDate: string;
     quorum: string;
     status: string;
+}
+
+export type ProposalsType = {
+    personal_proposals: Proposals[],
+    joined_proposals: Proposals[]
 }
 
 export type Votes = {

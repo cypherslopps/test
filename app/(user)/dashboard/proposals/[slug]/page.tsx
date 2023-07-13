@@ -17,6 +17,7 @@ import RedirectIcon from '@/public/svg/redirect.svg';
 import VoteList from "@/app/components/vote-list/vote-list";
 import VoteCast from "@/app/components/vote-cast/vote-cast";
 import { getProposal } from "@/app/lib/server";
+import { ProposalOption } from "@/typings";
 
 interface ProposalProps {
     params: {
@@ -177,7 +178,7 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
                     </header>
 
                     <div className='border-t border-tertiary-700/40 p-5 sm:py-4 sm:px-3 lg:px-5 space-y-5 sm:space-y-4 md:space-y-3'>
-                        {options.map(option => (
+                        {options.map((option: ProposalOption) => (
                             <OptionItem key={option.title} {...option} />
                         ))}
                     </div>

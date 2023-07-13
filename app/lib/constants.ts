@@ -6,7 +6,8 @@ import {
 	Socials, 
 	Votes,
 	Members,
-	Proposals
+	ProposalsType,
+	ProposalType
 } from '@/typings';
 import HeroImage from '@/public/images/hero-image.png';
 import RocketIcon from '@/public/svg/rocket.svg';
@@ -243,7 +244,7 @@ export const companySocials: Socials[] = [
 	},
 ];
 
-export const proposals =  {
+export const proposals: ProposalsType =  {
 	personal_proposals: [
 		{
 			user: {
@@ -399,6 +400,17 @@ export const proposals =  {
 		}
 	]
 };
+
+export const proposalsTabTypes: ProposalType[] = [
+	{
+		type: "personal_proposals",
+		title: "Personal Proposals"
+	},
+	{
+		type: "joined_proposals",
+		title: "Joined Proposals"
+	}
+]
 
 export const votes: Votes[] = [
 	{

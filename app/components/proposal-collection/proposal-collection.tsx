@@ -2,7 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import FormSearch from "../form-search/form-search";
-import { proposals } from "@/app/lib/constants";
+import { proposals, proposalsTabTypes } from "@/app/lib/constants";
 import ProposalItem from "../proposal-item/proposal-item";
 import Button from "../button/button";
 import { cn } from "@/app/lib/utils";
@@ -15,31 +15,15 @@ interface ProposalCollectionProps {
  type?: "dashboard"
  tabs?: boolean
 }
-
-interface ProposalTypes {
-  type: string,
-  title: string
-}
-
-const proposalTypes: ProposalTypes[] = [
-  {
-    type: "personal_proposals",
-    title: "Your proposals"
-  }, 
-  {
-    type: "joined_proposals",
-    title: "Joined proposals"
-  }
-]; 
  
 const ProposalCollection: FC<ProposalCollectionProps> = ({ styles, showButton, tabs, type }) => {
   const router = useRouter();
   const [tabValue, setTabValue] = useState<string | any>("personal_proposals");
-  const [proposalDataType, setProposalDataType] = useState<Proposals | []>([]);
+  const [proposalDataType, setProposalDataType] = useState<Proposals[] | []>([]);
 
   useEffect(() => {
-    let data: [] = [];
-    const proposalTabValue = proposals[tabValue];
+    let data: Proposals[] = [];
+    const proposalTabValue: Proposals[] = tabValue === "personal_proposals" ? proposals.personal_proposals : proposals.joined_proposals;
 
     if(type === "dashboard")
       data = proposalTabValue.filter((_: any, index: any) => index <= 1);
@@ -58,7 +42,7 @@ const ProposalCollection: FC<ProposalCollectionProps> = ({ styles, showButton, t
           <header className='flex gap-y-3 flex-col xs:gap-y-0 xs:flex-row xs:justify-between xs:items-center'>
             {tabs ? (
               <ul className="tabs flex items-center gap-x-3">
-                {proposalTypes.map(({ type, title }) => (
+                {proposalsTabTypes.map(({ type, title }) => (
                   <li 
                     className={`${type === tabValue ? "text-tertiary-700 border-b border-tertiary-700 font-bold" : ""} cursor-pointer transition-colors duration-200 text-[.95rem] xs:text-[.98rem] sm:text-base md:text-[.96rem] lg:text-[1.04rem]`} 
                     onClick={() => setTabValue(type)}
@@ -76,7 +60,7 @@ const ProposalCollection: FC<ProposalCollectionProps> = ({ styles, showButton, t
 
           {/* Proposals collection */}
           <div className='space-y-4'> 
-            {proposalDataType.map(proposal => (
+            {proposalDataType.map((proposal: Proposals) => (
               <ProposalItem 
                 key={proposal.title}
                 {...proposal} 

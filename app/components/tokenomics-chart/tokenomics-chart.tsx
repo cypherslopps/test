@@ -1,17 +1,18 @@
 "use client";
 
-import { useCallback, useEffect, useState, Suspense } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Heading from "../heading/heading";
 import { zkSyncAddresses } from "@/app/lib/constants";
 import { fetchZkSyncBalance } from "@/app/lib/zkSyncUtils";
 import { Loader2 } from "lucide-react";
+import { ApexOptions } from "apexcharts";
 
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
  
 const TokenomicsChart = () => {
-    const [options] = useState({
+    const [options] = useState<ApexOptions>({
         chart: {
             width: 720,
             height: "auto",
