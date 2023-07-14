@@ -216,7 +216,7 @@ function Dashboard() {
               <AccordionItem className='border-white/10 px-3' value="item-3">
                 <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">Is it safe to work with Nebula Stake?</AccordionTrigger>
                 <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed space-y-0.5">
-                  <p>Yes, it is safe with Nebula stake.</p>
+                  <p>Yes, it is safe to work with Nebula stake.</p>
                   <p>
                     In cases where tokens are unstacked before the end of the governance period, there will be no reward and there is a 5% penalty fee for early unstacking.
                   </p>
