@@ -196,27 +196,33 @@ function Dashboard() {
         {/* Faqs */}
         <section>
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem className='border-white/10 px-3' value="item-1">
-              <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">What is staking?</AccordionTrigger>
-              <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed">
-                Staking is the process of delegating digital assets to a validator and assigning them to a network to help secure its operations. By doing so, stakers can earn rewards based on the amount of assets they have committed, and the rewards are distributed by staking pools. VenomStake is a platform that aims to simplify the staking process and make it accessible to a wider audience.
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem className='border-white/10 px-3' value="item-1">
+                <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">What is staking?</AccordionTrigger>
+                <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed">
+                  Staking is the process of delegating digital assets to a validator and assigning them to a network to help secure its operations. By doing so, stakers can earn rewards based on the amount of assets they have committed, and the rewards are distributed by staking pools. Nebula is a platform that aims to simplify the staking process and make it accessible to a wider audience.
+                </AccordionContent>
+              </AccordionItem>
 
-            <AccordionItem className='border-white/10 px-3' value="item-2">
-              <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">How does Nebula Stake work?</AccordionTrigger>
-              <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed">
-              Staking is the process of delegating digital assets to a validator and assigning them to a network to help secure its operations. By doing so, stakers can earn rewards based on the amount of assets they have committed, and the rewards are distributed by staking pools. VenomStake is a platform that aims to simplify the staking process and make it accessible to a wider audience.
-              </AccordionContent>
-            </AccordionItem>
+              <AccordionItem className='border-white/10 px-3' value="item-2">
+                <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">How does Nebula Stake work?</AccordionTrigger>
+                <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed space-y-0.5">
+                  <p>
+                    The community can stake a minimum of 1 billion Nebula tokens in the governance protocol during a governance period and vote on all available proposals (including project development).
+                  </p>
+                  <p>At the end of each governance round, the community can unstake their tokens and claim rewards. </p>
+                </AccordionContent>
+              </AccordionItem>
 
-            <AccordionItem className='border-white/10 px-3' value="item-3">
-              <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">Is it safe to work with Nebula Stake?</AccordionTrigger>
-              <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed">
-              Staking is the process of delegating digital assets to a validator and assigning them to a network to help secure its operations. By doing so, stakers can earn rewards based on the amount of assets they have committed, and the rewards are distributed by staking pools. VenomStake is a platform that aims to simplify the staking process and make it accessible to a wider audience.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+              <AccordionItem className='border-white/10 px-3' value="item-3">
+                <AccordionTrigger className="text-tertiary-700 text-[.92rem] sm:text-[.98rem] py-5">Is it safe to work with Nebula Stake?</AccordionTrigger>
+                <AccordionContent className="text-[.88rem] sm:text-[.92rem] leading-relaxed space-y-0.5">
+                  <p>Yes, it is safe with Nebula stake.</p>
+                  <p>
+                    In cases where tokens are unstacked before the end of the governance period, there will be no reward and there is a 5% penalty fee for early unstacking.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
         </section>
       </section>
     </main>
