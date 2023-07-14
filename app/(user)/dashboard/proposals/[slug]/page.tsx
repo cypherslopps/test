@@ -1,6 +1,7 @@
+"use client";
+
 import React, { FC } from "react";
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from "next/navigation";
 import { proposals } from "@/app/lib/constants";
 import { flattenObject, slugConverter } from "@/app/lib/utils";
@@ -11,13 +12,12 @@ import Button from '@/app/components/button/button';
 import OptionItem from '@/app/components/option-item/option-item';
 import UserImage from '@/public/images/profile.png';
 import ShareIcon from '@/public/svg/share.svg';
-import MenuIcon from '@/public/svg/menu.svg';
 import DiscordLogo from '@/public/svg/discord.svg';
-import RedirectIcon from '@/public/svg/redirect.svg';
 import VoteList from "@/app/components/vote-list/vote-list";
 import VoteCast from "@/app/components/vote-cast/vote-cast";
 import { getProposal } from "@/app/lib/server";
 import { ProposalOption } from "@/typings";
+import { useAccount } from "wagmi";
 
 interface ProposalProps {
     params: {
@@ -26,9 +26,8 @@ interface ProposalProps {
 }
  
 const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
+    const { address } = useAccount();
     const proposal = getProposal(slug);
-
-    console.log(proposal);
 
     if(!proposal) 
         return notFound();
@@ -65,6 +64,7 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
                                 role="share button"
                                 variant='transparent'
                                 className=" text-[#586069] ss:px-0 md:px-0 lg:px-0"
+                                onClick={() => navigator.clipboard.writeText(`${address}`)}
                             >
                                 <Image 
                                     src={ShareIcon}
@@ -74,25 +74,10 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
 
                                 Share
                             </Button>
-
-                            <Button
-                                role="share button"
-                                variant='transparent'
-                                className="text-[#586069] ss:px-0 md:px-0 lg:px-0"
-                                title="Options"
-                            >
-                                <Image 
-                                src={MenuIcon}
-                                alt="share icon"
-                                width={10}
-                                height={10}
-                                className='w-full object-cover'
-                                />
-                            </Button>
                         </div>
                     </div>
 
-                    <p className='text-[.94rem] xs:text-[.96rem] sm:text-[1.02rem] md:text-[1.05rem] md:leading-[1.65rem] text-[#767a7e]'>{description}</p>
+                    <p className='text-[.94rem] xs:text-[.96rem] sm:text-[1.02rem] md:text-[1.05rem] md:leading-[1.65rem] text-white/90'>{description}</p>
                 </div>
 
                 {/* Vote Cast */}
@@ -122,7 +107,7 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
             </section> 
 
             {/* Aside */}
-            <aside className='w-full md-md:w-[31vw] lg:w-[28vw] grid grid-cols-1 sm:grid-cols-2 grid-rows-1 md-md:grid-cols-1 items-center gap-x-4 md-md:inline-block h-fit py-6 sm:px-[.97rem] space-y-4'>
+            <aside className='sticky top-14 lg:top-16 left-0 w-full md-md:w-[31vw] lg:w-[28vw] grid grid-cols-1 sm:grid-cols-2 grid-rows-1 md-md:grid-cols-1 items-center gap-x-4 md-md:inline-block h-fit py-6 sm:px-[.97rem] space-y-4'>
                 <blockquote className='border border-tertiary-700/40 rounded-lg'>
                     <header className='py-3 px-5 sm:py-4 md:py-5 lg:py-4 lg:px-5'>
                         <h4 className='text-base'>Information</h4>
@@ -131,23 +116,6 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
                     {/* Content */}
                     <div className='border-t border-tertiary-700/40'>
                         <ul className='wrapper px-4 py-4 sm:px-3 lg:px-5 space-y-4 sm:space-y-3 md:space-y-2'>
-                            <li className='flex items-center justify-between'>
-                                <span className='text-sm xs:text-[.92rem] lg:text-[.9rem] text-white/90'>Strategie(s):</span>
-                                <span className='text-[.84rem] sm:text-sm md:text-[.84rem]'>...</span>
-                            </li>
-
-                            <li className='flex items-center justify-between'>
-                                <span className='text-sm xs:text-[.92rem] lg:text-[.9rem] text-white/90'>IPFS:</span>
-                                <Link href="#" className='text-[.83r4m] sm:text-sm md:text-[.84rem] flex items-center gap-x-1 text-accent-shade-800'>
-                                #bafkrei
-                                <Image 
-                                    src={RedirectIcon}
-                                    alt="redirect icon"
-                                    className='w-4 h-4 object-cover'
-                                />
-                                </Link>
-                            </li>
-
                             <li className='flex items-center justify-between'>
                                 <span className='text-sm xs:text-[.92rem] lg:text-[.9rem] text-white/90'>Voting system:</span>
                                 <span className='text-[.84rem] sm:text-sm md:text-[.84rem]'>Single choice voting</span>
@@ -161,11 +129,6 @@ const Proposal: FC<ProposalProps> = ({ params: { slug }}) => {
                             <li className='flex items-center justify-between'>
                                 <span className='text-sm xs:text-[.92rem] lg:text-[.9rem] text-white/90'>End date:</span>
                                 <span className='text-[.84rem] sm:text-sm md:text-[.84rem]'>Oct 16, 2022, 8:41 PM</span>
-                            </li>
-
-                            <li className='flex items-center justify-between'>
-                                <span className='text-sm xs:text-[.92rem] lg:text-[.9rem] text-white/90'>Snapshot:</span>
-                                <span className='text-[.84rem] sm:text-sm md:text-[.84rem]'>15,726,420</span>
                             </li>
                         </ul>
                     </div>

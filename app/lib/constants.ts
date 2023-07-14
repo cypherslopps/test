@@ -258,17 +258,17 @@ export const proposals: ProposalsType =  {
 			options: [
 				{
 					percentage: '41.52%',
-					title: "Option 1",
+					title: "Up vote",
 					stat: "3M NGT"
 				},
 				{
 					percentage: '85%',
-					title: "Option 2",
+					title: "Down vote",
 					stat: "18K NGT"
 				},
 				{
 					percentage: '60.23%',
-					title: "Option 3",
+					title: "No vote",
 					stat: "4.1M NGT"
 				}
 			],
@@ -288,17 +288,17 @@ export const proposals: ProposalsType =  {
 			options: [
 				{
 					percentage: '41.52%',
-					title: "Option 1",
+					title: "Up vote",
 					stat: "3M NGT"
 				},
 				{
 					percentage: '75%',
-					title: "Option 2",
+					title: "Down vote",
 					stat: "18K NGT"
 				},
 				{
 					percentage: '60.23%',
-					title: "Option 3",
+					title: "No vote",
 					stat: "4.1M NGT"
 				}
 			],
@@ -320,17 +320,17 @@ export const proposals: ProposalsType =  {
 			options: [
 				{
 					percentage: '41.52%',
-					title: "Option 1",
+					title: "Up vote",
 					stat: "3M NGT"
 				},
 				{
 					percentage: '70%',
-					title: "Option 2",
+					title: "Down vote",
 					stat: "18K NGT"
 				},
 				{
 					percentage: '60.23%',
-					title: "Option 3",
+					title: "No vote",
 					stat: "4.1M NGT"
 				}
 			],
@@ -350,17 +350,17 @@ export const proposals: ProposalsType =  {
 			options: [
 				{
 					percentage: '53.52%',
-					title: "Option 1",
+					title: "Up vote",
 					stat: "3M NGT"
 				},
 				{
 					percentage: '20%',
-					title: "Option 2",
+					title: "Down vote",
 					stat: "18K NGT"
 				},
 				{
 					percentage: '80.32%',
-					title: "Option 3",
+					title: "No vote",
 					stat: "49.14M NGT"
 				}
 			],
@@ -380,17 +380,17 @@ export const proposals: ProposalsType =  {
 			options: [
 				{
 					percentage: '53.52%',
-					title: "Option 1",
+					title: "Up vote",
 					stat: "3M NGT"
 				},
 				{
 					percentage: '20%',
-					title: "Option 2",
+					title: "Down vote",
 					stat: "18K NGT"
 				},
 				{
 					percentage: '80.32%',
-					title: "Option 3",
+					title: "No vote",
 					stat: "49.14M NGT"
 				}
 			],
@@ -403,8 +403,12 @@ export const proposals: ProposalsType =  {
 
 export const proposalsTabTypes: ProposalType[] = [
 	{
-		type: "personal_proposals",
-		title: "Personal Proposals"
+		type: "all",
+		title: "All"
+	},
+	{
+		type: "created_proposals",
+		title: "Created Proposals"
 	},
 	{
 		type: "joined_proposals",
@@ -503,11 +507,11 @@ export const voteOptions: string[] = [
 ];
 
 export const zkSyncAddresses = [
-	"0x5E93Dc46cb41D9ACbEc0da2b5F33de7a4a8Cf7a9",
-	"0x66fDFa5c8E7451F1f3F02E8EC5002F17F776B98f",
 	"0x38e64A4A0aad1dcD37f4D8A2Df9D5Af5b8cB4855",
-	"0x66fDFa5c8E7451F1f3F02E8EC5002F17F776B98f",
-	"0x38e64A4A0aad1dcD37f4D8A2Df9D5Af5b8cB4855"
+	"0x6CF0d196000dE67A9eD829070d1870B686F8232D",
+	"0x38e64A4A0aad1dcD37f4D8A2Df9D5Af5b8cB4855",
+	"0x5E93Dc46cb41D9ACbEc0da2b5F33de7a4a8Cf7a9",
+	"0x8019D4AF29d88944CE5b0491A8410411a5716AB3"
 ];
 
 export const claimNowDate = new Date("Jun 28, 2023");

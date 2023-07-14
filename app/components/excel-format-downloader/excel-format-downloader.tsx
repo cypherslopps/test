@@ -20,10 +20,6 @@ const ExcelFormatDownloader: FC<ExcelFormatDownloaderProps> = ({ children, data 
         // Headers
         utils.sheet_add_aoa(worksheet, [["Address", "Options", "Coins"]], { origin: 'A1' });
 
-        // Calculate column width
-        // const maxWidth = data.reduce((w,r) => Math.max(r.user.name), 10);
-        // worksheet["!cols"] = [{ wch: maxWidth }];
-
         // Create an XLSX file and save to Votes.xlsx
         writeFile(workbook, "Votes.xlsx", { compression: true });
     }
@@ -33,6 +29,7 @@ const ExcelFormatDownloader: FC<ExcelFormatDownloaderProps> = ({ children, data 
             role="download button"
             variant="text-primary"
             title="Download"
+            className="px-0 sm:px-0"
             onClick={downloadExcelData}
         >
             {children}

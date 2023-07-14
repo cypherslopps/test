@@ -59,7 +59,7 @@ export const capitalizeFirstLetter = (text: string) => {
 }
 
 export const flattenObject = (data: object) => {
-    return Object.entries(data).map(([name, value]) => value).flat()
+    return Object.entries(data).map(([_, value]) => value).flat()
 }
  
 // Count Down

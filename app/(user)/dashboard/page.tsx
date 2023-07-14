@@ -181,8 +181,6 @@ function Dashboard() {
                 </TabsContent>
               </div>
             </Tabs>
-
-            <h1 className='text-[.9rem] xxs:text-[.92rem] xs:text-[1.05rem] sm:text-lg font-extrabold text-center mt-5 sm:mt-7'>Stake NEBULA and receive zkSync right now</h1>
           </div>
         </section>
 

@@ -17,7 +17,6 @@ const CustomConnectKit: FC<CustomConnectKitProps> = ({ variant="primary", classN
     <ClientOnly>
         <ConnectKitButton.Custom>
         {({ isConnected, isConnecting, show, truncatedAddress, ensName, chain }) => {
-            console.log(ensName, isConnecting, chain)
             return (
             <Button onClick={show} variant={variant ?? "primary"} className={`${className ?? "rounded-[10rem]"}`}>
                 {isConnected ? (

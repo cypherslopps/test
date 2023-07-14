@@ -6,7 +6,6 @@ import Button from "../button/button";
 import { companySocials, dashboardLinks } from "@/app/lib/constants";
 import DashboardSidebarLink from "../dashboard-sidebar/dashboard-sidebar-link";
 import SocialLink from "../social-link/social-link";
-import Modal from "../modal/modal";
 import { motion } from "framer-motion";
 import DashboardModal from "../dashboard-modal/dashboard-modal";
 
@@ -26,10 +25,10 @@ const Offset: FC<OffsetProps> = ({ closeOffset }) => {
                 <motion.div 
                     initial={{ left: "-10rem", opacity: 0 }}
                     animate={isModalOpen ? { left: "-10rem", opacity: 0 }: { left: 0, opacity: 1 }}
-                    className={`${isModalOpen ? "hidden" : ""} h-full w-[95%] xs:w-80 flex flex-col justify-between bg-[#08161c] relative py-8 px-3 xs:px-6 space-y-6 lg:space-y-8`}
+                    className={`${isModalOpen ? "hidden" : ""} h-full w-[80%] xs:w-[70%] flex flex-col xs:justify-between bg-[#08161c] relative py-8 px-3 space-y-14 xs:px-6 xs:space-y-6 lg:space-y-8`}
                 >
                     <span className="close absolute top-5 right-5 cursor-pointer transition-transform duration-300 hover:rotate-180" onClick={closeOffset}>
-                        <X className="w-5 h-5 md:w-6 md:h-6 stroke-tertiary-700" />
+                        <X className="w-7 h-7 xs:w-5 xs:h-5 md:w-6 md:h-6 stroke-tertiary-700" />
                     </span>
 
                     {/* Profile */}
@@ -63,7 +62,7 @@ const Offset: FC<OffsetProps> = ({ closeOffset }) => {
                     </ul>
 
                     {/* Footer */}
-                    <footer className='footer flex justify-center gap-x-5 lg:gap-x-4'>
+                    <footer className='footer absolute bottom-8 left-3 xs:relative flex justify-center gap-x-5 lg:gap-x-4'>
                         {companySocials.map(social => (
                         <SocialLink 
                             key={social.title}

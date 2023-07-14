@@ -48,7 +48,7 @@ export type ProposalOption = {
 }
 
 export type ProposalType = {
-    type: "personal_proposals" | "joined_proposals",
+    type: "all" | "created_proposals" | "joined_proposals",
     title: string
 }
 
@@ -78,4 +78,10 @@ export type Votes = {
 export type Members = {
     user: User,
     role: string
+}
+
+export type CountryDataTypes = {
+    id: number
+    name: string
+    iso2: string
 }

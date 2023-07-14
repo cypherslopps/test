@@ -3,6 +3,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { ConnectKitProvider } from "connectkit";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { CoinbaseWalletConnector } from "wagmi/connectors/coinbaseWallet";
 import { zkSyncTestnet } from "wagmi/chains";
@@ -43,6 +44,13 @@ export const wagmiConfig = createConfig({
         showQrModal: true,
       },
     }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: 'zknebula',
+        shimDisconnect: true,
+      }
+    })
   ],
 });
 

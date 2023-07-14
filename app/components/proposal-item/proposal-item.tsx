@@ -30,8 +30,8 @@ const ProposalItem = ({ user, title, slug, description, options, endDate, quorum
             {/* Content */}
             <div className='content space-y-3 xs:space-y-4'>
                 <header className='space-y-2'>
-                    <h2 className='font-bold text-[1.07rem] sm:text-[1.11rem] lg:text-[1.15rem]'>{title}</h2>
-                    <p className='text-[.9rem] xs:text-[.92rem] sm:text-[.95rem] md:text-base leading-relaxed mt-2 text-white/90 font-medium'>{truncateString(description, 165)}</p>
+                    <h2 className='font-bold text-lg xs:text-[1.07rem] sm:text-[1.11rem] lg:text-[1.15rem]'>{title}</h2>
+                    <p className='text-[.9rem] xs:text-[.92rem] sm:text-[.95rem] md:text-base leading-relaxed mt-2 text-[#767a7e] font-medium'>{truncateString(description, 165)}</p>
                 </header>
 
                 {/* Options */}

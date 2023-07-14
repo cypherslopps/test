@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState, FC } from "react";
+import { FormEvent, useEffect, useState, FC, useCallback } from "react";
 import Image from "next/image";
 import Avatar from '@/public/images/avatar.png';
 import Button from "../button/button";
@@ -7,6 +7,7 @@ import FormInput from "../form-input/form-input";
 import { fetchAllCountries } from "@/app/lib/server";
 import { X } from "lucide-react";
 import Modal from "../modal/modal";
+import { CountryDataTypes } from "@/typings";
 
 interface DashboardModalProps {
     closeModal: () => void;
@@ -19,24 +20,7 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
         email: "",
         location: ""
     });
-    const [countries, setCountries] = useState([
-        "Afghanistan",
-        "Albania",
-        "Algeria",
-        "Andorra",
-        "Angola",
-        "Antigua and Barbuda",
-        "Argentina",
-        "Armenia",
-        "Australia",
-        "Austria",
-        "Azerbaijan",
-        "The Bahamas",
-        "Bahrain",
-        "Bangladesh",
-        "Barbados",
-        "India",
-    ]);
+    const [countries, setCountries] = useState<CountryDataTypes[] | []>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [emailError, setEmailError] = useState("");
     const [usernameError, setUsernameError] = useState("");
@@ -73,15 +57,20 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
         }        
     } 
 
-    useEffect(() => {
+    const fetchCountries = useCallback(() => {
         async function fetchData() {
-          const countriesData = await fetchAllCountries();
-          console.log(countriesData)
-            //setCountries(countriesData);
+          const countriesData: CountryDataTypes[] | any = await fetchAllCountries();
+          const sortedCountries = countriesData.sort((a: any, b: any) => a.name > b.name ? 1 : -1);
+          
+          setCountries(sortedCountries);
         }
     
         fetchData();
-      }, []);
+    }, [fetchAllCountries]);
+
+    useEffect(() => {
+        fetchCountries();
+    }, [fetchCountries]);
 
     return (
         <Modal className={className}>
@@ -141,10 +130,11 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
                                 <label className='capitalize text-sm xs:text-[.9rem] md:text-[.92rem] text-gray-300'>location</label>
 
                                 <select 
-                                    className='form-select w-full py-[.7rem] px-4 transition-all duration-150 placeholder:text-gray-600 text-[.93rem] sm:text-[.95rem] md:text-[.97rem] placeholder:text-[.97rem] font-inherit focus:ring-1 focus:ring-tertiary-900 rounded-lg border-[rgba(255,255,255,.05)] bg-[rgba(0,0,0,.1)] text-gray-300 outline-none cursor-pointer text-sm ring-0 shadow-none focus:border-none focus:outline-none'
+                                    className='form-select w-full py-[.7rem] px-4 transition-all duration-150 placeholder:text-gray-600 text-[.93rem] sm:text-[.95rem] md:text-[.97rem] placeholder:text-[.97rem] font-inherit focus:ring-1 focus:ring-tertiary-900 rounded-lg border-[rgba(255,255,255,0.05)] bg-[rgba(0,0,0,.1)] text-gray-700 outline-none cursor-pointer text-sm ring-0 shadow-none focus:border-none focus:outline-none disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-90'
                                     name="location"
                                     value={form.location}
                                     onChange={handleChange}
+                                    disabled={!countries.length}
                                     onBlur={({ target }) => validateForm({
                                         name: target.name,
                                         value: target.value,
@@ -152,9 +142,9 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
                                         error: "Please select is location"
                                     })}
                                 >
-                                    <option value="all">All</option>
-                                    {countries.map(country=> (
-                                        <option key={country} value={country}>{country}</option>
+                                    <option value="select_country">Select a country</option>
+                                    {countries.length && countries.map(({ id, name })=> (
+                                        <option key={id} value={name}>{name}</option>
                                     ))}
                                 </select>
 

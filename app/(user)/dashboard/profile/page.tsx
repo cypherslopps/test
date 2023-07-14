@@ -17,6 +17,7 @@ interface UserProfileProps {
  
 const UserProfile: FC<UserProfileProps> = () => {
     const { address } = useAccount();
+    const email = null;
 
     return ( 
         <main className='grid md-md:grid-cols-[max-content,1fr] md-md:gap-x-6 lg:gap-x-9'>
@@ -54,8 +55,8 @@ const UserProfile: FC<UserProfileProps> = () => {
                             />
                         )}
                         <div className="space-x-2">
-                            <span className="text-[.88rem] xs:text-[.9rem] sm:text-[.92rem] md:text-[.95rem] sm:-mt-0.5">dinkydonkey@gmail.com</span>
-                            <Link href="/dashboard/profile/edit" className="text-accent-shade-800 underline text-[.85rem] xs:text-sm">Edit</Link>
+                            <span className="text-[.88rem] xs:text-[.9rem] sm:text-[.92rem] md:text-[.95rem] sm:-mt-0.5">xxxxx@example.com</span>
+                            {email && (<Link href="/dashboard/profile/edit" className="text-accent-shade-800 underline text-[.85rem] xs:text-sm">Edit</Link>)}
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ const TokenomicsChart = () => {
             height: "auto",
             type: 'polarArea'
         },
-        labels: ['Community Token Claim', 'Liquidity', 'Proposal Fund', 'Governance', 'Nebula NFT Drop'],
+        labels: ['Community Token Claim', 'Governance', 'Liquidity', 'Proposal Fund', 'Nebula NFT Drop'],
         fill: {
             opacity: 1
         },
@@ -119,7 +119,7 @@ const TokenomicsChart = () => {
               heading="Project Addresses"
               subHeading="Total supply: 100 Trillion"
               variant="light"
-              styles={`text-center md:text-center ${isLoading ? "" : "xs:-mb-12"}`}
+              styles={`text-center md:text-center ${isLoading ? "" : "mb-12 xs:mb-16"}`}
               removeContentPadding
             />
             {!isLoading ? (

@@ -11,12 +11,21 @@ export function getProposal(slug: string) {
 
 export async function fetchAllCountries() {
     try {
-        const response = await fetch('http://api.geonames.org/countryInfo?username=cyphersloops'); 
-        let responseType = await response.text();
-        let countries = new window.DOMParser().parseFromString(responseType, "text/xml");
-        console.log(countries, "fetched countries");
-        return countries;
-      } catch (error) {
+      var headers = new Headers();
+      headers.append("X-CSCAPI-KEY", `RTJjYzBTbXFSZHlEMTkyTmZSa3hzWm9na05weTZVQWU4N1V1QmNTbg==
+      `);
+      
+      var requestOptions: RequestInit = {
+         method: 'GET',
+         headers: headers,
+         redirect: 'follow'
+      };
+      
+      const response = await fetch("https://api.countrystatecity.in/v1/countries", requestOptions)
+      const countries = await response.json();
+
+      return countries;
+    } catch (error) {
         console.error('Error fetching countries:', error);
         return [];
       }
