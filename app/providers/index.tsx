@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { ProposalProvider } from './proposals-provider';
 import WagmiProvider from './wagmi-providers';
+import { UserProvider } from './user-provider';
 // import { ModalProvider } from './modal-provider';
 // import WagmiProvider from './wagmi-providers';
 
@@ -13,9 +14,11 @@ type ProviderType = {
 function Providers({ children }: ProviderType) {
     return (
         <WagmiProvider>
-            <ProposalProvider>
-                {children}
-            </ProposalProvider>
+            <UserProvider>
+                <ProposalProvider>
+                    {children}
+                </ProposalProvider>
+            </UserProvider>
         </WagmiProvider>
     )
 }

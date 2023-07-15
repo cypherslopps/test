@@ -1,4 +1,5 @@
 import { RawDraftContentState } from 'draft-js';
+import type { JsonRpcFetchFunc, ExternalProvider } from "@metamask/providers";
 
 interface HashtagConfig {
     trigger?: string | undefined;
@@ -11,5 +12,11 @@ declare function draftToHtml(
     directional?: boolean,
     customEntityTransform?: (...args: any[]) => any,
 ): string;
+
+declare global {
+    interface Window {
+      ethereum?: JsonRpcFetchFunc | ExternalProvider;
+    }
+}
 
 export = draftToHtml;

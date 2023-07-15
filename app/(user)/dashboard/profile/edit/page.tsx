@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from 'next/image';
 import DashboardSidebar from "@/app/components/dashboard-sidebar/dashboard-sidebar";
 import Avatar from "@/public/images/avatar.png";
@@ -8,12 +8,17 @@ import FormInput from "@/app/components/form-input/form-input";
 import Button from "@/app/components/button/button";
 import { validateForm } from "@/app/lib/validation";
 import PreviousButton from "@/app/components/previous-button/previous-button";
+import { useUser } from "@/app/providers/user-provider";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/hooks/auth";
+import toast from "react-hot-toast";
+import { useAccount } from "wagmi";
 
-interface EditProfileProps {
-    
-}
- 
-const EditProfile: FC<EditProfileProps> = () => {
+const EditProfile = () => {
+    const { user, error } = useUser(); 
+    const { address } = useAccount();
+    const { updateUserProfile } = useAuth();
+    const router = useRouter();
     const [profile, setProfile] = useState({
         username: "",
         email: "",
@@ -23,7 +28,12 @@ const EditProfile: FC<EditProfileProps> = () => {
     const [usernameError, setUsernameError] = useState<string>("");
     const [emailError, setEmailError] = useState<string>("");
     const [bioError, setBioError] = useState<string>("");
+    const [requestError, setRequestError] = useState<string>("");
     const isValid = Object.values(profile).every(val => Boolean(val));
+
+    // Redirect user if user doesn't exist
+    if(error && Object.values(user).map(val => Boolean(val)))
+        router.back();
 
     const handleChange = ({ target }: { target: any}) => {
         const { name, value } = target;
@@ -34,19 +44,49 @@ const EditProfile: FC<EditProfileProps> = () => {
         })
     }
 
-    function editProfile(e: FormEvent) {
+    async function editProfile(e: FormEvent) {
         e.preventDefault();
 
         setIsLoading(true);
 
-        try {
-            console.log("edit profile")
-        } catch(e) {
-            console.log(e)
-        } finally {
-            setIsLoading(false);
-        }
+        if(isValid) {
+            try {
+                await updateUserProfile({
+                    setRequestError,
+                    data: profile,
+                    wallet_address: `${address}`        
+                });
+    
+                setTimeout(() => {
+                    // Reset form
+                    setProfile({
+                        username: "",
+                        email: "",
+                        bio: ""
+                    });
+        
+                    toast.success("User profile successfully updated");
+
+                    // Redirect to profile page
+                    setTimeout(() => router.push("/dashboard/profile"), 1000);
+                }, 500)
+            } catch(e) {
+                console.log(e);
+                toast.error("There was an error updating user profile");
+            } finally {
+                setTimeout(() => setIsLoading(false), 3500);
+            }
+        } 
     }
+
+    // Set user
+    useEffect(() => {
+        setProfile({
+            username: user?.username || "",
+            email: user?.email || "",
+            bio: user?.bio || ""
+        })
+    }, [user])
 
 
     return (
@@ -71,6 +111,9 @@ const EditProfile: FC<EditProfileProps> = () => {
                     className="profile-form flex flex-col gap-4 mx-auto"
                     onSubmit={editProfile}
                 >
+                    {/* Request error */}
+                    <p className="text-sm sm:text-[.9rem] text-red-600 text-center">{requestError}</p>
+
                     <FormInput 
                         type="text"
                         name="username"

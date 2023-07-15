@@ -8,6 +8,9 @@ import { fetchAllCountries } from "@/app/lib/server";
 import { X } from "lucide-react";
 import Modal from "../modal/modal";
 import { CountryDataTypes } from "@/typings";
+import { useAuth } from "@/app/hooks/auth";
+import { useAccount } from "wagmi";
+import toast from "react-hot-toast";
 
 interface DashboardModalProps {
     closeModal: () => void;
@@ -15,6 +18,8 @@ interface DashboardModalProps {
 }
 
 const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {   
+    const { addJoinedUser } = useAuth();
+    const { address } = useAccount();
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -23,8 +28,10 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
     const [countries, setCountries] = useState<CountryDataTypes[] | []>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [emailError, setEmailError] = useState("");
-    const [usernameError, setUsernameError] = useState("");
+    const [nameError, setNameError] = useState("");
     const [locationError, setLocationError] = useState("");
+    const [requestError, setRequestError] = useState<any>("");
+    const [requestResponse, setRequestResponse] = useState<any>("");
     const isValid = Object.values(form).every(val => Boolean(val));
 
     function handleChange({ target }: any) {
@@ -36,27 +43,45 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
         });
     }
 
-    function submitJoinedUser(e: FormEvent) {
+    // Submit newly joined user
+    async function submitJoinedUser(e: FormEvent) {
         e.preventDefault();
 
         setIsLoading(true);
 
         if(isValid) {
             try {
-                console.log("submit form")
-            } catch(e) {
-                console.log("there was an error posting form")
-            } finally {
-                setIsLoading(false);
+                await addJoinedUser({
+                    setRequestError,
+                    setRequestResponse,
+                    data: {
+                        ...form,
+                        wallet_address: address
+                    }
+                });
 
-                // Close modal
-                setTimeout(() => {
-                    closeModal();
-                }, 100);
+                if(requestResponse) {
+                    // Reset form
+                    setForm({
+                        username: "",
+                        email: "",
+                        location: ""
+                    });
+
+                    toast.success(requestResponse);
+
+                    // Close modal
+                    setTimeout(() => closeModal(), 500);
+                }
+            } catch(e) {
+                console.log("there was an error posting form", e)
+            } finally {
+                setTimeout(() => setIsLoading(false), 3500);
             }
         }        
     } 
 
+    // Fetch countries
     const fetchCountries = useCallback(() => {
         async function fetchData() {
           const countriesData: CountryDataTypes[] | any = await fetchAllCountries();
@@ -93,19 +118,22 @@ const DashboardModal: FC<DashboardModalProps> = ({ closeModal, className }) => {
                             className="flex flex-col gap-y-3"
                             onSubmit={submitJoinedUser}
                         >
+                            {/* Request error */}
+                            <p className="text-sm sm:text-[.9rem] text-red-600 text-center">{requestError}</p>
+
                             <FormInput 
                                 type="text"
                                 name="username"
-                                label="username"
+                                label="Username"
                                 value={form.username}
                                 onChange={handleChange}
                                 onBlur={({ target }) => validateForm({
                                     name: target.name,
                                     value: target.value,
-                                    setError: setUsernameError,
+                                    setError: setNameError,
                                     error: "Username can't be empty"
                                 })}
-                                error={usernameError}
+                                error={nameError}
                                 variant="dark"
                             />
 

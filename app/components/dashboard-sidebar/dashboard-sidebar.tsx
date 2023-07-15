@@ -6,13 +6,14 @@ import DashboardSidebarLink from './dashboard-sidebar-link';
 import { dashboardLinks, companySocials } from '@/app/lib/constants';
 import SocialLink from '../social-link/social-link';
 import UserProfile from '../user-profile/user-profile';
-import Modal from '../modal/modal';
 import DashboardModal from '../dashboard-modal/dashboard-modal';
 import ClientOnly from '../clientOnly/clientOnly';
+import { useAccount } from 'wagmi';
 
 
 const DashboardSidebar = () => {  
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { isConnected } = useAccount();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -26,7 +27,8 @@ const DashboardSidebar = () => {
             role="join button"
             variant="primary"
             className="block w-full"
-            onClick={openModal}
+            disabled={!isConnected}
+            onClick={() => isConnected && openModal()}
           >
             Join
           </Button>

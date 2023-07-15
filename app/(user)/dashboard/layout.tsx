@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import Navigation from '../../components/navigation/navigation';
 
 export const metadata = {
@@ -16,6 +17,12 @@ export default function RootLayout({
         scrollPositionProp
         showLinks={false}
         showHamburger  
+      />
+
+      {/* Toaster */}
+      <Toaster 
+        position="bottom-right"
+        reverseOrder={false}
       />
 
       <main className='mt-16 xxs:mt-20 mb-6 xs:mt-20 sm:mt-20 py-4 w-[94%] sm:w-[96%] md-md:w-[94%] lg:w-[85%] mx-auto'>

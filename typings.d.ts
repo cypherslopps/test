@@ -85,3 +85,12 @@ export type CountryDataTypes = {
     name: string
     iso2: string
 }
+
+export type UserProps = {
+    id: any,
+    username: string,
+    email: string,
+    location: string,
+    wallet_address: any,
+    bio: string
+}

@@ -1,23 +1,19 @@
 "use client";
 
-import { FC } from "react";
 import Image from 'next/image';
 import DashboardSidebar from "@/app/components/dashboard-sidebar/dashboard-sidebar";
 import Avatar from "@/public/images/avatar.png";
 import Favicon from "@/public/images/favicon-bordered.png";
 import CopyContent from "@/app/components/copy-content/copy-content";
-import { truncateWalletAddress } from "@/app/lib/utils";
+import { capitalizeFirstLetter, truncateWalletAddress } from "@/app/lib/utils";
 import Link from "next/link";
 import InfoText from "@/app/components/info-text/info-text";
 import { useAccount } from "wagmi";
-
-interface UserProfileProps {
-    
-}
+import { useUser } from "@/app/providers/user-provider";
  
-const UserProfile: FC<UserProfileProps> = () => {
+const UserProfile = () => {
     const { address } = useAccount();
-    const email = null;
+    const { user } = useUser();
 
     return ( 
         <main className='grid md-md:grid-cols-[max-content,1fr] md-md:gap-x-6 lg:gap-x-9'>
@@ -46,7 +42,7 @@ const UserProfile: FC<UserProfileProps> = () => {
                     </figure>
                     
                     <div className="text-center flex flex-col sm:gap-y-1">
-                        <h1 className="text-[1.1rem] sm:text-lg md:text-xl font-semibold">Nebula</h1>
+                        <h1 className="text-[1.1rem] sm:text-lg md:text-xl font-semibold">{user.username ? capitalizeFirstLetter(user.username) : "Nebula"}</h1>
                         {address && (
                             <CopyContent 
                                 textToCopy={address}
@@ -55,8 +51,8 @@ const UserProfile: FC<UserProfileProps> = () => {
                             />
                         )}
                         <div className="space-x-2">
-                            <span className="text-[.88rem] xs:text-[.9rem] sm:text-[.92rem] md:text-[.95rem] sm:-mt-0.5">xxxxx@example.com</span>
-                            {email && (<Link href="/dashboard/profile/edit" className="text-accent-shade-800 underline text-[.85rem] xs:text-sm">Edit</Link>)}
+                            <span className="text-[.88rem] xs:text-[.9rem] sm:text-[.92rem] md:text-[.95rem] sm:-mt-0.5">{user.email ? user.email : "xxxxx@example.com"}</span>
+                            {user.email && (<Link href="/dashboard/profile/edit" className="text-accent-shade-800 underline text-[.85rem] xs:text-sm">Edit</Link>)}
                         </div>
                     </div>
                 </div>
@@ -72,8 +68,7 @@ const UserProfile: FC<UserProfileProps> = () => {
                     <h3 className="font-semibold text-lg md:text-xl">Bio</h3>
 
                     {/* content */}
-                    <div className="border border-tertiary-shade-900/40 rounded-md p-3 text-[.83rem] sm:p-4 sm:text-sm lg:text-[.89rem] leading-relaxed">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, deleniti? Voluptatibus quaerat alias eos modi quidem in qui ipsa quisquam fugit saepe asperiores laborum, eius distinctio omnis. Delectus, assumenda minus.
+                    <div className="border border-tertiary-shade-900/40 rounded-md p-3 text-[.83rem] sm:p-4 sm:text-sm lg:text-[.89rem] leading-relaxed">{user.bio ?? "Edit profile to add bio"}
                     </div>
                 </div>
             </section>
