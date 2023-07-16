@@ -74,9 +74,7 @@ const EditProfile = () => {
                     // Redirect to profile page
                     setTimeout(() => router.push("/dashboard/profile"), 500);
                 }, 500)
-            } catch(e) {
-                toast.error("There was an error updating user profile");
-            
+            } catch(e) {            
                 return e;
             } finally {
                 setTimeout(() => setIsLoading(false), 3500);
