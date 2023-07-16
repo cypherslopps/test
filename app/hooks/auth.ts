@@ -28,13 +28,19 @@ export const useAuth = () => {
     }
 
     // Update user profile
-    const updateUserProfile = async ({ setRequestError, wallet_address, data }: { setRequestError: any, wallet_address: string, data: any }) => {
+    const updateUserProfile = async ({ setRequestError, setUser, wallet_address, data }: { setRequestError: any, setUser: any, wallet_address: string, data: any }) => {
         await csrf();
 
         setRequestError("");
 
         axios.put(`profiles/${wallet_address}/edit`, data)
-            .then(({ data }) => setResponse(data.message))
+            .then(({ data }) => {
+                // Set user
+                setTimeout(() => setUser(data.user), 500);
+
+                // Set response message
+                setResponse(data.message)
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 

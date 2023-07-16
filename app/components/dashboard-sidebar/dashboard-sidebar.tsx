@@ -17,6 +17,7 @@ const DashboardSidebar = () => {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  console.log(isConnected, !isConnected, "dashboard join button")
 
   return (
     <ClientOnly>

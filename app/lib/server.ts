@@ -1,7 +1,7 @@
 import { Proposals } from "@/typings";
 import { proposals } from "./constants";
 import { flattenObject } from "./utils";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 export function getProposal(slug: string) {
     const proposal = flattenObject(proposals).filter(proposal => proposal.slug === slug)[0];
@@ -12,8 +12,7 @@ export function getProposal(slug: string) {
 export async function fetchAllCountries() {
     try {
       var headers = new Headers();
-      headers.append("X-CSCAPI-KEY", `RTJjYzBTbXFSZHlEMTkyTmZSa3hzWm9na05weTZVQWU4N1V1QmNTbg==
-      `);
+      headers.append("X-CSCAPI-KEY", process.env.NEXT_PUBLIC_COUNTRY_API);
       
       var requestOptions: RequestInit = {
          method: 'GET',

@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import { useAccount } from "wagmi";
 
 const EditProfile = () => {
-    const { user, error } = useUser(); 
+    const { user, setUser, error } = useUser(); 
     const { address } = useAccount();
     const { updateUserProfile } = useAuth();
     const router = useRouter();
@@ -53,6 +53,7 @@ const EditProfile = () => {
             try {
                 await updateUserProfile({
                     setRequestError,
+                    setUser,
                     data: profile,
                     wallet_address: `${address}`        
                 });
@@ -67,12 +68,16 @@ const EditProfile = () => {
         
                     toast.success("User profile successfully updated");
 
+                    // Refresh page
+                    router.refresh();
+
                     // Redirect to profile page
-                    setTimeout(() => router.push("/dashboard/profile"), 1000);
+                    setTimeout(() => router.push("/dashboard/profile"), 500);
                 }, 500)
             } catch(e) {
-                console.log(e);
                 toast.error("There was an error updating user profile");
+            
+                return e;
             } finally {
                 setTimeout(() => setIsLoading(false), 3500);
             }

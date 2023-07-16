@@ -39,18 +39,6 @@ const inter = localFont({
   ],
 });
 
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: "--font-syne"
-})
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: "--font-roboto"
-})
-
 export const metadata = {
   title: 'zkNebula',
   description: 'zkNebula is an extraordinary decentralized autonomous organization (DAO) project that has been developed to be entirely community-driven, providing the blockchain community with complete control over all decisions, contributions, and participation within the protocol',
@@ -66,7 +54,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href='../../_next/static/media/favicon-large.3b6a782a.png' />
       </head>
-      <body className={`${inter.className} ${syne.className} selection:bg-accent-shade-800 selection:text-black ${roboto.className} font-sans bg-app-background text-white`}>          
+      <body className={`${inter.className} selection:bg-accent-shade-800 selection:text-black font-sans bg-app-background text-white`}>          
         <Providers>
           {children}
         </Providers>
