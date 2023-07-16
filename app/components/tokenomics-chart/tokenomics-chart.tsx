@@ -100,7 +100,7 @@ const TokenomicsChart = () => {
         const addressBalances = await Promise.all(zkSyncAddresses.map(address => fetchZkSyncBalance(address)));
 
         setBalances({ data: addressBalances });
-    }, [fetchZkSyncBalance]);
+    }, []);
 
     // Invoke memoized function
     useEffect(() => {

@@ -22,7 +22,7 @@ const NotFound: FC<NotFoundProps> = (props) => {
                 
                 <div className="space-y-1 text-center">
                     <h1 className="text-[1.3rem] xs:text-2xl sm:text-3xl font-extrabold">Proposal not found</h1>
-                    <p className="text-[.94rem] xs:text-[1.06rem] sm:text-base text-white/95">If you're unsure of the proposal please go to <Link href="/dashboard/proposals" className="underline text-tertiary-700">Proposals</Link> page</p>
+                    <p className="text-[.94rem] xs:text-[1.06rem] sm:text-base text-white/95">{"If you're unsure of the proposal please go to"} <Link href="/dashboard/proposals" className="underline text-tertiary-700">Proposals</Link> page</p>
                 </div>
             </section>
         </main>

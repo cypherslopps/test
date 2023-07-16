@@ -8,11 +8,9 @@ import { menuLinks, navigationLinks } from '@/app/lib/constants';
 import Favicon from '@/public/images/favicon.png';
 import FaviconPhone from "@/public/images/favicon-large.png";
 import { MenuIcon } from 'lucide-react';
-import Button from '../button/button';
 import Offset from '../offset/offset';
 import Dropdown from '../dropdown/dropdown';
 import CustomConnectKit from '../connectkit-custom-button/connectkit-custom-button';
-import { ConnectKitButton } from 'connectkit';
 import ClientOnly from '../clientOnly/clientOnly';
 
 
@@ -34,6 +32,15 @@ const Navigation = ({ showLinks=true, border=false, scrollPositionProp, showHamb
 		// Set scroll position
 		if(!scrollPositionProp)
 			setScrollPosition(70);
+
+		function checkNavScrollPosition(e: Event) {
+			const { scrollY } = window;
+	
+			if(scrollY >= scrollPosition)
+				setIsActive(true)
+			else
+				setIsActive(false);
+		}
 			
 
 		window.addEventListener("scroll", checkNavScrollPosition);
@@ -41,16 +48,7 @@ const Navigation = ({ showLinks=true, border=false, scrollPositionProp, showHamb
 		return () => {
 			window.removeEventListener("scroll", checkNavScrollPosition); 
 		}
-	}, [scrollPositionProp]);
-
-	function checkNavScrollPosition(e: Event) {
-		const { scrollY } = window;
-
-		if(scrollY >= scrollPosition)
-			setIsActive(true)
-		else
-			setIsActive(false);
-	}
+	}, [scrollPositionProp, scrollPosition]);
 
 	useEffect(() => {
 		window.addEventListener("click", onHoverHandler)

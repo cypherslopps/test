@@ -17,7 +17,7 @@ const Portal: FC<PortalProps> = ({ children, elementId, className }) => {
     useEffect(() => {
         portalRef.current = document.querySelector<HTMLElement>(`#${elementId}`);
         setMounted(true);
-    }, [mounted]);
+    }, [mounted, elementId]);
 
     return ((mounted && portalRef.current) ? createPortal(
         <div className={`fixed top-0 left-0 w-full h-screen bg-black/10 ${className ?? "z-40"} backdrop-blur-lg`}>

@@ -48,7 +48,7 @@ function EditProposal() {
                 description: convertFromRaw(description)
             })
         }
-    }, [proposal])
+    }, [proposal, proposalForm])
 
     function handleEditorChange(content: any) {
         setProposalForm({
